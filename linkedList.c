@@ -110,11 +110,11 @@ int ListFind(list* l,void* elm,ListCompareFunction cmp,int startPosition) {
 	node* current = l->head;
 
 	int count = 0;
-	int countToStart = 0;
-	while( cmp(current->data,elm) != 0 && current->next != NULL) {
-		if ( count >= startPosition) { current=current->next; }
-		count++;
+	while(current->next != NULL) { 
+		if ( count > startPosition && cmp(current->data,elm) == 0 ) { return count; }
 
+		current=current->next;
+		count++;
 	}
 
 	if ( current->next != NULL) { return count; }

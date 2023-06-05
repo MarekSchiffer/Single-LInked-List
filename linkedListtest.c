@@ -192,7 +192,7 @@ static void TestFindAndRemove(list* l) {
 	assert (pos1 != -1);
 	fprintf(stdout,"Found at Position %i\n",pos1);
 	fprintf(stdout,"Let's search for @ (ListFind) from position 11:  ...  ");
-	int pos2 = ListFind(l,"@",chrCmp,12);
+	int pos2 = ListFind(l,"@",chrCmp,11);
 	assert (pos2 != -1);
 	fprintf(stdout,"Found at Position %i\n",pos2);
 
