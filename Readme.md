@@ -41,29 +41,30 @@ Every time an item of the list is regained control of and it's living on the hea
 responsibility to free the memory. <br>
 
 The provided functions include:
-| Function            | Time Complexity | Description                                                |
-|---------------------|-----------------|------------------------------------------------------------|
-| `ListInit`          |      O(1)       | Initializes a new empty list.                              |
-| `ListDispose`       |      O(n)       | Disposes of the list, freeing the associated memory.       |
-| `ListInsert`        |      O(1)       | Inserts an item in the list.                               |
-| `ListRemove`        |      O(1)       | Removes the first item from the list.                      |
-| `ListRemove_Back`   |      O(n)       | Removes the last item from the list.                       |
-| `ListInsert_Front`  |      O(1)       | Inserts an item at the front of the list.                  |
-| `ListLength`        |      O(1)       | Returns the number of items in the list.                   |
-| `ListInsertNth`     |      O(N)       | Inserts an item at a specified position in the list.       |
-| `ListRemoveNth`     |      O(N)       | Removes the item at a specified position in the list.      |
-| `ListReturnNth`     |      O(N)       | Returns the item at a specified position in the list.      |
-| `ListFind`          |      O(n)       | Searches for an item in the list and returns its position. |
-| `ListSort`          |      O(n²)      | Sorts the list. (Insertion Sort)                           |
-| `ListMap`           |      O(n)       | Applies a function to each item in the list.               |
-|----------------------------------------------------------------------------------------------------|
+| Function            | Time | Description                                                |
+|---------------------|------|------------------------------------------------------------|
+| `ListInit`          | O(1) | Initializes a new empty list.                              |
+| `ListDispose`       | O(n) | Disposes of the list, freeing the associated memory.       |
+| `ListInsert`        | O(1) | Inserts an item in the list.                               |
+| `ListRemove`        | O(1) | Removes the first item from the list.                      |
+| `ListRemove_Back`   | O(n) | Removes the last item from the list.                       |
+| `ListInsert_Front`  | O(1) | Inserts an item at the front of the list.                  |
+| `ListLength`        | O(1) | Returns the number of items in the list.                   |
+| `ListInsertNth`     | O(N) | Inserts an item at a specified position in the list.       |
+| `ListRemoveNth`     | O(N) | Removes the item at a specified position in the list.      |
+| `ListReturnNth`     | O(N) | Returns the item at a specified position in the list.      |
+| `ListFind`          | O(n) | Searches for an item in the list and returns its position. |
+| `ListSort`          | O(n²)| Sorts the list. (Insertion Sort)                           |
+| `ListMap`           | O(n) | Applies a function to each item in the list.               |
 
 ## How to use:
 ```
 list chrList = ListInit(freeChr);
 
 for(ch = 'A'; ch <= 'Z'; ch++) {
-  jj
+	char* insert = malloc(sizeof(char));
+    *insert = ch;
+    ListhInsert(&chrList,insert);
 }
 ```
 ### License
