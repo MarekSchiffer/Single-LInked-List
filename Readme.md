@@ -24,14 +24,14 @@ every data saved in the list resides somewhere else in the heap, freeing is esse
 
 However, when relying on the free function, it's important to point out, that the list
 can not hold the identical item twice! That means if 10 'a' shall be inserted in the list,
-10 separate 'a' have to be created in 10 different parts of the heap.
+10 separate 'a' have to be created in 10 different parts of the heap. <br>
 If the list were to contain multiple nodes, which point to the same position in memory,
 the free function, would try to free the same memory twice, which will lead free to
 abort. <br>
 
 We could modify freeing by checking if there are identical void\* in the list and removing them
 before calling free. This is obviously an expensive operation and we therefore chose not to
-do that. It also limits functions such as `ListRemoveNTh`, which also has to free before removing 
+do that. It also limits functions such as `ListRemoveNth`, which also has to free before removing 
 the node. <br>
 
 Instead of a free function the value NULL can be passed. In that case multiple pointers to the
@@ -41,19 +41,33 @@ Every time an item of the list is regained control of and it's living on the hea
 responsibility to free the memory. <br>
 
 The provided functions include:
-| Function            | Time Complexity | Description                                         |
-|---------------------|-----------------|-----------------------------------------------------|
-| `ListInit`          | O(1)            | Initializes a new empty list.                       |
-| `ListDispose`       | O(n)            | Disposes of the list, freeing the associated memory. |
-| `ListInsert`        | O(1)            | Inserts an item in the list.                        |
-| `ListRemove`        | O(1)            | Removes the first item from the list.               |
-| `ListRemove_Back`   | O(n)            | Removes the last item from the list.                |
-| `ListInsert_Front`  | O(1)            | Inserts an item at the front of the list.           |
-| `ListLength`        | O(1)            | Returns the number of items in the list.            |
-| `ListInsertNth`     | O(N)            | Inserts an item at a specified position in the list.|
-| `ListRemoveNth`     | O(N)            | Removes the item at a specified position in the list.|
-| `ListReturnNth`     | O(N)            | Returns the item at a specified position in the list.|
-| `ListFind`          | O(n)            | Searches for an item in the list and returns its position.|
-| `ListSort`          | O(n²)           | Sorts the list.                                     |
-| `ListMap`           | O(n)            | Applies a function to each item in the list.         |
+| Function            | Time Complexity | Description                                                |
+|---------------------|-----------------|------------------------------------------------------------|
+| `ListInit`          |      O(1)       | Initializes a new empty list.                              |
+| `ListDispose`       |      O(n)       | Disposes of the list, freeing the associated memory.       |
+| `ListInsert`        |      O(1)       | Inserts an item in the list.                               |
+| `ListRemove`        |      O(1)       | Removes the first item from the list.                      |
+| `ListRemove_Back`   |      O(n)       | Removes the last item from the list.                       |
+| `ListInsert_Front`  |      O(1)       | Inserts an item at the front of the list.                  |
+| `ListLength`        |      O(1)       | Returns the number of items in the list.                   |
+| `ListInsertNth`     |      O(N)       | Inserts an item at a specified position in the list.       |
+| `ListRemoveNth`     |      O(N)       | Removes the item at a specified position in the list.      |
+| `ListReturnNth`     |      O(N)       | Returns the item at a specified position in the list.      |
+| `ListFind`          |      O(n)       | Searches for an item in the list and returns its position. |
+| `ListSort`          |      O(n²)      | Sorts the list. (Insertion Sort)                           |
+| `ListMap`           |      O(n)       | Applies a function to each item in the list.               |
+|----------------------------------------------------------------------------------------------------|
 
+## How to use:
+```
+list chrList = ListInit(freeChr);
+
+for(ch = 'A'; ch <= 'Z'; ch++) {
+  jj
+}
+```
+### License
+
+**© 2011 Marek Schiffer**
+
+### Acknowledgements
