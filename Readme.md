@@ -79,11 +79,6 @@ ListRemoveNth(&chrList,&removeItem,12);
 fprintf(stdout,"\nremoveItem: %s\n",(char*)removeItem);
 ListMap(&chrList,printChr,stdout);
 ```
-This removes the 
-```
-void* removeItem;
-ListReturnNth(&chrList,removeItem,12);
-```
 Finally, we need to free removeItem and the list.
 ```
 ListDispose(&chrList);
