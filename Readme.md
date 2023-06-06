@@ -62,10 +62,29 @@ The provided functions include:
 list chrList = ListInit(freeChr);
 
 for(ch = 'A'; ch <= 'Z'; ch++) {
-	char* insert = malloc(sizeof(char));
+    char* insert = malloc(sizeof(char));
     *insert = ch;
-    ListhInsert(&chrList,insert);
+    ListInsert(&chrList,insert);
 }
+```
+Creates the list:
+```
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+```
+
+
+```
+   void* removeItem = malloc(sizeof(char));
+   ReturnNth(&chrList,(char*)removeItem,11)
+```
+The list now looks like:
+```
+ABCDEFGHIJKLNOPQRSTUVWXYZ
+```
+Finally, we need to free removeItem and the list.
+```
+Dispose(&chrList);
+free(removeItem;
 ```
 ### License
 

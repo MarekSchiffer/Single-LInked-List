@@ -36,6 +36,7 @@ void ListDispose(list* l) {
 		current = next;
 	}
   }
+
 }
 
 void ListInsert_front(list* l, void* elmAdr) {
@@ -59,7 +60,6 @@ void ListInsert(list* l, void* elmAdr) {
 	(l->tail)->next = newNode;
 	l->tail = newNode;
 	l->size++;
-
 }
 
 void ListRemove(list* l, void** elmAdr) {
@@ -72,12 +72,13 @@ void ListRemove(list* l, void** elmAdr) {
 	if (l->freeFn != NULL ) { l->freeFn((l->head)->data); }
 	}
 
+	if (l->head == l->tail) { l->tail = NULL; }
+
 	node* next = (l->head)->next;
 	free(l->head);
 	l->head = next;
 	l->size -=1;
 }
-
 
 void ListRemove_back(list* l,void** elmAdr) {
 	node* current = l->head;
@@ -138,6 +139,8 @@ static void PopPosition(node** n, void** elmAdr) {
 
 void ListRemoveNth(list *l,void** elmAdr, int position) {
 	assert( 0<= position <= l->size);
+	assert( l->head != NULL);
+	assert( l->head != NULL);
 
 	if (position == 0)         { ListRemove(l,elmAdr); return; }
 	if (position == l->size) { ListRemove_back(l,elmAdr); return; }
@@ -184,6 +187,7 @@ void ListInsertNth(list* l,void* elmAdr, int position) {
 
 void ListReturnNth(list* l,void** elmAdr, int position) {
 	assert(0<= position <= l->size);
+	assert( l->head != NULL);
 
 	node* current = l->head;
 

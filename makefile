@@ -5,4 +5,4 @@ linkedList.o: linkedList.c
 	clang -c linkedList.c
 
 clean:
-	rm -f ./linkedList.o ./linkedList
+	rm -f ./??*.o ./linkedList 

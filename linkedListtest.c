@@ -3,12 +3,13 @@
 *      This program tests the Single Linked List and is heavily based on a test by Jerry Cain      *
 *                                                                                                  *
 ***************************************************************************************************/
-
 #include "linkedList.h"
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
 #include <ctype.h>
+#include <math.h>
+#include <time.h>
 #include <stdio.h>
 
 void freeInt(void* v1) {
@@ -22,7 +23,6 @@ void freeChr(void* v1) {
 void freeStr(void* v1) {
 	free(*(char**)v1);
 }
-
 
 int intCmp(const void* v1,const void* v2) {
 	return *(int*)v1 - *(int*)v2;
@@ -41,7 +41,6 @@ void printInt(void* elm,void* fp) {
 	fflush((FILE*)fp);
 }
 
-
 void printChr(void* elm,void* file) {
 	fprintf((FILE*)file,"%c",*(char*)elm);
 	fflush((FILE*)file);
@@ -51,7 +50,6 @@ void printStr(void* elm,void* file) {
 	fprintf((FILE*)file,"%s  ",*(char**)elm);
 	fflush((FILE*)file);
 }
-
 
 static void InsertAlphabet(list* l) {
 	char* tmp;
@@ -89,7 +87,6 @@ static void TestCharSort(list* l) {
 	printf("\n");
 }
 
-
 static void LowerLetters(list* l) {
 
 	for(int i=0; i< ListLength(l); i+=2) {
@@ -98,9 +95,8 @@ static void LowerLetters(list* l) {
 		*elm = tolower(*elm);
 	}
 
-	printf("After lowering ever 2nd letter (ReturnNth): \t\t\t\t\t");
+	fprintf(stdout,"After lowering ever 2nd letter (ReturnNth): \t\t\t\t\t");
 	ListMap(l,printChr,stdout);
-	printf("\n");
 
 }
 
@@ -112,7 +108,7 @@ void TestInsertDelete(list* l) {
 		ListInsertNth(l,ch,i);
   }
 
-	printf("After inserting dashes (ListInsertNth): \t\t\t     ");
+	fprintf(stdout,"\nAfter inserting dashes (ListInsertNth): \t\t\t     ");
 	ListMap(l,printChr,stdout);
 	printf("\n");
 
@@ -120,9 +116,8 @@ void TestInsertDelete(list* l) {
 		ListRemoveNth(l,NULL,i);
   }
 
-	printf("After deleting dashes (ListRemoveNth): \t\t\t\t\t\t");
+	fprintf(stdout,"After deleting dashes (ListRemoveNth): \t\t\t\t\t\t");
 	ListMap(l,printChr,stdout);
-	printf("\n");
 
 	for (int i=0; i<3; i++) {
 	char* chf =  malloc(sizeof(char));
@@ -136,9 +131,8 @@ void TestInsertDelete(list* l) {
 
 }
 
-  printf("After Inserting at both ends (ListInsert_front & ListInsert):  \t\t     ");
+  fprintf(stdout,"\nAfter Inserting at both ends (ListInsert_front & ListInsert):  \t\t     ");
   ListMap(l,printChr,stdout);
-  printf("\n");
 
 	void* resFront[3];
 	void* resBack[3];
@@ -148,7 +142,7 @@ void TestInsertDelete(list* l) {
 	ListRemove_back(l,(resBack+i));
 	}
 
-  fprintf(stdout,"\nRemoving both, but saving the result (ListRemove & ListRemove_back): \t\t");
+  fprintf(stdout,"\n\nRemoving both, but saving the result (ListRemove & ListRemove_back): \t\t");
   ListMap(l,printChr,stdout);
   printf("\n");
 	for(int i=0; i<3; i++) {
@@ -184,10 +178,10 @@ static void TestFindAndRemove(list* l) {
 	ListInsertNth(l,chInsert1,11);
 	ListInsertNth(l,chInsert2,13);
 
-	fprintf(stdout,"Insert some @ at position 11 and 13 (ListInsertNth) \t\t\t      ");
+	fprintf(stdout,"\nInsert some @ at position 11 and 13 (ListInsertNth) \t\t\t      ");
 	ListMap(l,printChr,stdout);
 
-	fprintf(stdout,"\nLet's search for @ (ListFind) from position  0:  ...  ");
+	fprintf(stdout,"\n\nLet's search for @ (ListFind) from position  0:  ...  ");
 	int pos1 = ListFind(l,"@",chrCmp,0);
 	assert (pos1 != -1);
 	fprintf(stdout,"Found at Position %i\n",pos1);
@@ -198,7 +192,7 @@ static void TestFindAndRemove(list* l) {
 
 	fprintf(stdout,"\nRemove from the middle, position 18-22 and keep the result (ListRemoveNth):   ");
 	ListMap(l,printChr,stdout);
-	printf("\n");
+	fprintf(stdout,"\n");
 
 	void* resMiddle[5];
 	for (int i=0; i<4; i++) {
@@ -210,8 +204,7 @@ static void TestFindAndRemove(list* l) {
 	}
 	fprintf(stdout,"\nThe Linked List now looks like this: \t\t\t\t\t\t");
 	ListMap(l,printChr,stdout);
-	printf("\n");
-	fprintf(stdout,"We took ownership of the elments back, we need to free them again ... ");
+	fprintf(stdout,"\nWe took ownership of the elments back, we need to free them again ... ");
 	for (int i=0; i<4; i++) {
 		free(resMiddle[i]);
 	}
@@ -232,11 +225,10 @@ static void TestDispose(list* l) {
 
 }
 
-
 static void SimpleTest() {
 
-	fprintf(stdout,"\n-----------------------------------------Creating a Sinlge Linked List for Chars-----------------------------------------\n");
-	fprintf(stdout,"-----------------------------------------Testing every functionality implemented-----------------------------------------\n\n");
+	fprintf(stdout,"\n------------------------------------   Creating a Sinlge-Linked-List for chars   ---------------------------------------\n");
+	fprintf(stdout,"------------------------------------   Testing every functionality implemented   ---------------------------------------\n\n");
 
 	list alphabet = ListInit(freeChr);
 
@@ -251,7 +243,7 @@ static void SimpleTest() {
 
 static void TestStringList() {
 	
-	fprintf(stdout,"\n-----------------------------------------Creating a Sinlge Linked List for Strings---------------------------------------\n\n");
+	fprintf(stdout,"\n--------------------------------------   Creating a Sinlge-Linked-List for Strings   ------------------------------------\n\n");
 
 	list stringList = ListInit(freeStr);
 
@@ -290,86 +282,99 @@ static void TestStringList() {
 } 
 
 static void InsertPermutationOfNumber(list* l, long n, long d) {
-	fprintf(stdout,"Generating one permutation of all numbers between [0,%ld) \n",d-1);
+  clock_t start, end; char result[12];
+
+	fprintf(stdout,"Generating one permutation of all numbers between [0,%ld] \n",d);
 
 	for(long k=0; k<d; k++) {
 	   long* residue = malloc(sizeof(long));
 		 *residue = (long) (((long long)k * (long long)n) % d);
 		 ListInsert(l,residue);
 	}	
+
 }
 
 static void FindANumber(list* l,int* toFind) {
 	int position;
 	
-  fprintf(stdout, "Looking for number %i in the list\n",*toFind);
+  fprintf(stdout, "Looking for number %i in the list \t\t ... \t\t ",*toFind);
 	fflush(stdout);
 
 	position = ListFind(l,toFind,intCmp,0);
 
-  fprintf(stdout, "Found! It's at position %i\n",position);
+  fprintf(stdout, "Found! It's at position %i\n\n",position);
 	fflush(stdout);
 
 }
 
 static void TestSort(list* l) {
-	fprintf(stdout, "Starting sorting the list with %i elements",ListLength(l));
+	fprintf(stdout, "Starting sorting the list with %i elements \t ... \t\t ",ListLength(l));
 	fflush(stdout);
 	ListSort(l,intCmp);
-	fprintf(stdout, "\n[Done!]\n");
+	fprintf(stdout, "Done!\n");
+}
 
-	fprintf(stdout, "Checking if it's indeed sorted:\n");
-	long* embeddedLong = malloc(sizeof(long));
-	for (int residue =0; residue < ListLength(l); residue++) {
-		ListReturnNth(l,(void*)&embeddedLong,residue);
-		ListReturnNth(l,(void*)&embeddedLong,residue);
-		assert( *embeddedLong == residue);
+static void ConfirmSorting(list* l) {
+	int originalLength =ListLength(l);
+//	ListRemoveNth(l,NULL,ListLength(l)/2);t
+	fprintf(stdout, "Checking if it's indeed sorted: \t\t ... \t\t ");
+	void* embeddedLong = malloc(sizeof(long));
+	for (int residue = 0; residue < originalLength; residue++) {
+		ListRemove(l,&embeddedLong);
+//		ListReturnNth(l,(void*)&embeddedLong,residue);
+		assert( *(long*)embeddedLong == residue);
 	}
-	fprintf(stdout, "Yes, it is!\n");
+	fprintf(stdout, "Yes, it is!\n\n");
 }
 
 static void TestDelete(list* l) {
 	long* largestOriginalNumber = malloc(sizeof(long));
-	fprintf(stdout, "Removing every Node by repeatedlly removing the 100th-to-last Node \n");
+	fprintf(stdout, "Removing every Node by repeatedlly removing the 100th-to-last Node, starting from 0 each time! This will take a moment!\n");
 	fflush(stdout);
   ListReturnNth(l,(void*)&largestOriginalNumber,ListLength(l)-1);
-	int k =0;
-	while (ListLength(l) >= 20) {
-		k++;
+	while (ListLength(l) >= 100) {
 		ListRemoveNth(l,NULL,ListLength(l)-100);
-//		if ( k % 1000 == 0 ) { printf("%i \n"); }
 	}
-	fprintf(stdout, "The last 100 elments in the list are:\n");
+	fprintf(stdout, "Almost done! Removing the last 100 elements alternating from the font and back:\t ... \t");
 	fflush(stdout);
 
-	ListMap(l,printInt,stdout);
-
-  fprintf(stdout, "\nRemoving the final 20:\n");
-	fflush(stdout);
-
-	int* justRemoved =malloc(sizeof(int));
-	while(ListLength(l) >0) { ListRemoveNth(l,(void*)&justRemoved,ListLength(l)-1);
-  fprintf(stdout, "Removing: %i\n",*justRemoved);
-	fflush(stdout);
+	while(ListLength(l)>1) { 
+		ListRemove(l,NULL);
+		ListRemove_back(l,NULL);
 	}
+		ListRemove(l,NULL);
+	fprintf(stdout, " Done!\n");
+}
+
+static void DisposeLargeStack(list* l) {
+	fprintf(stdout, "Finally, Disposing the list:\t ... \t");
+	fflush(stdout);
+	ListDispose(l);
+	fprintf(stdout, "All clear!\n");
+
 
 }
 
 static void TestingALargeLinkedList() {
 
-	fprintf(stdout,"\n-----------------------------------Performance Test for very large Single Linked Lists-----------------------------------\n\n");
-  static const long kLargePrime =100391;
-	static const long kEvenLargerPrime =201577;
+	fprintf(stdout,"\n--------------------------------   Performance Test for very large Single-Linked-List   ---------------------------------\n\n");
+  static const long prime1 =100391;
+	static const long prime2 =201577;
 
   int* toFind = malloc(sizeof(int));
 	*toFind = 711;
 
 	list numbers = ListInit(freeInt);
-	InsertPermutationOfNumber(&numbers,kLargePrime,kEvenLargerPrime);
-  FindANumber(&numbers,toFind);
-	TestSort(&numbers);
-	TestDelete(&numbers);
 
+	InsertPermutationOfNumber(&numbers,prime1,prime2);
+	FindANumber(&numbers,toFind);
+	TestSort(&numbers);
+  ConfirmSorting(&numbers);
+
+ 	InsertPermutationOfNumber(&numbers,prime1,prime2); // Refilling the list.
+
+	TestDelete(&numbers);
+	DisposeLargeStack(&numbers);
 	ListDispose(&numbers);
 }
 
@@ -380,6 +385,4 @@ int main() {
 	SimpleTest();
 	TestingALargeLinkedList();
   TestStringList();
-
-		
 }
