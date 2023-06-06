@@ -58,6 +58,8 @@ The provided functions include:
 | `ListMap`           | O(n) | Applies a function to each item in the list.               |
 
 ## How to use:
+The file linkedListtest.c has a variety of examples to test the implementation of the Single-Linked-List.
+This is just a short example with the emphasize on how to remove an item and free it.
 ```
 list chrList = ListInit(freeChr);
 
@@ -67,17 +69,10 @@ for(char ch = 'A'; ch <= 'Z'; ch++) {
     ListInsert(&chrList,insert);
 }
 ```
-We can plot the list with:
-```
- ListMap(&chrList,printChr,stdout);
-```
 Now, let's remove a node and save it.
 ```
 void* removeItem;
 ListRemoveNth(&chrList,&removeItem,12);
-
-fprintf(stdout,"\nremoveItem: %s\n",(char*)removeItem);
-ListMap(&chrList,printChr,stdout);
 ```
 Finally, we need to free removeItem and the list.
 ```
@@ -86,11 +81,6 @@ free(removeItem);
 ```
 Notice, that removeItem needs to be freed as well.
 
-## Examples and Testing
-The file linkedListtest.c has a variety of examples to test the 
-implementation of the Single-Linked-List.
 ### License
 
 **© 2011 Marek Schiffer**
-
-### Acknowledgements
