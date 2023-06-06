@@ -24,7 +24,7 @@ every data saved in the list resides somewhere else in the heap, freeing is esse
 
 However, when relying on the free function, it's important to point out, that the list
 can not hold the identical item twice! That means if 10 'a' shall be inserted in the list,
-10 separate 'a' have to be created in 10 different parts of the heap. <br>
+10 separate 'a' have to be created in 10 different parts of the heap.
 If the list were to contain multiple nodes, which point to the same position in memory,
 the free function, would try to free the same memory twice, which will lead free to
 abort. <br>
@@ -61,11 +61,11 @@ The provided functions include:
 ```
 list chrList = ListInit(freeChr);
 
-	for(char ch = 'A'; ch <= 'Z'; ch++) {
-	    char* insert = malloc(sizeof(char));
-	    *insert = ch;
-	    ListInsert(&chrList,insert);
-	}
+for(char ch = 'A'; ch <= 'Z'; ch++) {
+    char* insert = malloc(sizeof(char));
+    *insert = ch;
+    ListInsert(&chrList,insert);
+}
 ```
 We can plot the list with:
 ```
@@ -73,15 +73,16 @@ We can plot the list with:
 ```
 Now, let's remove a node and save it.
 ```
-  void* removeItem;
-  ListRemoveNth(&chrList,&removeItem,12);
-  fprintf(stdout,"\nremoveItem: %s\n",(char*)removeItem);
-  ListMap(&chrList,printChr,stdout);
+void* removeItem;
+ListRemoveNth(&chrList,&removeItem,12);
+
+fprintf(stdout,"\nremoveItem: %s\n",(char*)removeItem);
+ListMap(&chrList,printChr,stdout);
 ```
 This removes the 
 ```
-   void* removeItem;
-   ListReturnNth(&chrList,removeItem,12);
+void* removeItem;
+ListReturnNth(&chrList,removeItem,12);
 ```
 Finally, we need to free removeItem and the list.
 ```
