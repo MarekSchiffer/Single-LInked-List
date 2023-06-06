@@ -61,31 +61,38 @@ The provided functions include:
 ```
 list chrList = ListInit(freeChr);
 
-for(ch = 'A'; ch <= 'Z'; ch++) {
-    char* insert = malloc(sizeof(char));
-    *insert = ch;
-    ListInsert(&chrList,insert);
-}
+	for(char ch = 'A'; ch <= 'Z'; ch++) {
+	    char* insert = malloc(sizeof(char));
+	    *insert = ch;
+	    ListInsert(&chrList,insert);
+	}
 ```
-Creates the list:
+We can plot the list with:
 ```
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
+ ListMap(&chrList,printChr,stdout);
 ```
-
-
+Now, let's remove a node and save it.
 ```
-   void* removeItem = malloc(sizeof(char));
-   ReturnNth(&chrList,(char*)removeItem,11)
+  void* removeItem;
+  ListRemoveNth(&chrList,&removeItem,12);
+  fprintf(stdout,"\nremoveItem: %s\n",(char*)removeItem);
+  ListMap(&chrList,printChr,stdout);
 ```
-The list now looks like:
+This removes the 
 ```
-ABCDEFGHIJKLNOPQRSTUVWXYZ
+   void* removeItem;
+   ListReturnNth(&chrList,removeItem,12);
 ```
 Finally, we need to free removeItem and the list.
 ```
-Dispose(&chrList);
-free(removeItem;
+ListDispose(&chrList);
+free(removeItem);
 ```
+Notice, that removeItem needs to be freed as well.
+
+## Examples and Testing
+The file linkedListtest.c has a variety of examples to test the 
+implementation of the Single-Linked-List.
 ### License
 
 **© 2011 Marek Schiffer**
